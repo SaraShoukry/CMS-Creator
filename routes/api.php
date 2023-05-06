@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\CustomAttributeController;
+use App\Http\Controllers\EntityCustomAttributeController;
 use App\Http\Controllers\TableController;
 
 /*
@@ -56,6 +57,10 @@ Route::group(['prefix' => 'custom_attributes'], function ($router) {
     $router->post('', [CustomAttributeController::class, 'store']);
     $router->post('/{id}/edit', [CustomAttributeController::class, 'update']);
     $router->delete('{id}', [CustomAttributeController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'assign_custom_attributes'], function ($router) {
+    $router->post('', [EntityCustomAttributeController::class, 'store']);
 });
 
 Route::group(['prefix' => 'tables'], function ($router) {
