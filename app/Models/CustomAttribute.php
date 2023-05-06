@@ -15,6 +15,7 @@ class CustomAttribute extends Model
      */
     protected $fillable = [
         'name',
+        'type',
     ];
 
     /**

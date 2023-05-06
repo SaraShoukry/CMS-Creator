@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EntityController;
+use App\Http\Controllers\CustomAttributeController;
 use App\Http\Controllers\TableController;
 
 /*
@@ -47,6 +48,14 @@ Route::group(['prefix' => 'entities'], function ($router) {
     $router->post('', [EntityController::class, 'store']);
     $router->post('/{id}/edit', [EntityController::class, 'update']);
     $router->delete('{id}', [EntityController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'custom_attributes'], function ($router) {
+    $router->get('/', [CustomAttributeController::class, 'index']);
+    $router->get('/{id}', [CustomAttributeController::class, 'show']);
+    $router->post('', [CustomAttributeController::class, 'store']);
+    $router->post('/{id}/edit', [CustomAttributeController::class, 'update']);
+    $router->delete('{id}', [CustomAttributeController::class, 'delete']);
 });
 
 Route::group(['prefix' => 'tables'], function ($router) {
