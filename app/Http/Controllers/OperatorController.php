@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Password;
 use Validator;
 
 
@@ -56,7 +57,13 @@ class OperatorController extends Controller
             'name' => 'required|max:255',
             'username' => 'required|max:255|unique:users,username',
             'email'  => 'email|unique:users,email',
-            'password' => 'required|string|confirmed|min:6',
+            'password' =>['required', 'confirmed',Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+                ->uncompromised()
+            ],
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);

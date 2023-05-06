@@ -31,11 +31,13 @@ class OperatorRepository implements OperatorRepositoryInterface
 
     public function createOperator(array $operatorDetails)
     {
-        return User::create(array_merge(
+        $user = User::create(array_merge(
             $operatorDetails,
             ['password' => bcrypt($operatorDetails['password']),
                 'role' => User::OPERATOR]
         ));
+        $user->givePermissionTo(['enter entities', 'fetch entities', 'fetch specific entity']);
+        return $user;
 
     }
 

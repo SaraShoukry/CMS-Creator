@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\CustomAttributeController;
 use App\Http\Controllers\EntityCustomAttributeController;
+use App\Http\Controllers\CRMController;
 use App\Http\Controllers\TableController;
 
 /*
@@ -28,7 +29,7 @@ Route::group([
     'prefix' => 'auth'
 ], function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
+//    Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
@@ -63,6 +64,14 @@ Route::group(['prefix' => 'assign_custom_attributes', 'middleware' => ['role:adm
     $router->post('', [EntityCustomAttributeController::class, 'store']);
 });
 
-Route::group(['prefix' => 'tables'], function ($router) {
-    $router->post('create', [\App\Http\Controllers\TableController::class, 'createTable']);
+Route::group(['prefix' => 'tables', 'middleware' => ['role:admin']], function ($router) {
+    $router->post('create', [TableController::class, 'createTable']);
+});
+
+
+Route::group(['prefix' => 'crm', 'middleware' => ['role:operator']], function ($router) {
+    $router->get('/{entity_id}', [CRMController::class, 'index']);
+    $router->get('/{entity_id}/{id}', [CRMController::class, 'show']);
+    $router->post('{entity_id}', [CRMController::class, 'store']);
+    $router->post('/{entity_id}/edit', [CRMController::class, 'update']);
 });

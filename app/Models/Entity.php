@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Entity extends Model
@@ -31,5 +32,8 @@ class Entity extends Model
      */
     protected $casts = [];
 
-
+    public function customAttributes(): BelongsToMany
+    {
+        return $this->belongsToMany(CustomAttribute::class, 'entity_custom_attributes');
+    }
 }

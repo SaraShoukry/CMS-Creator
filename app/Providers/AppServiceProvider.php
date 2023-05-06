@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Interfaces\CRMRepositoryInterface;
+use App\Repositories\CRMRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\OperatorRepositoryInterface;
 use App\Interfaces\EntityRepositoryInterface;
@@ -25,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(EntityRepositoryInterface::class, EntityRepository::class);
         $this->app->bind(CustomAttributeRepositoryInterface::class, CustomAttributeRepository::class);
         $this->app->bind(EntityCustomAttributeRepositoryInterface::class, EntityCustomAttributeRepository::class);
+        $this->app->bind(CRMRepositoryInterface::class, CRMRepository::class);
 
     }
 
