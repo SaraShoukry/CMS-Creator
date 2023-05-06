@@ -35,7 +35,7 @@ Route::group([
 });
 
 
-Route::group(['prefix' => 'operators'], function ($router) {
+Route::group(['prefix' => 'operators', 'middleware' => ['role:admin']], function ($router) {
     $router->get('/', [\App\Http\Controllers\OperatorController::class, 'index']);
     $router->get('/{id}', [\App\Http\Controllers\OperatorController::class, 'show']);
     $router->post('', [\App\Http\Controllers\OperatorController::class, 'store']);
@@ -43,7 +43,7 @@ Route::group(['prefix' => 'operators'], function ($router) {
     $router->delete('{id}', [\App\Http\Controllers\OperatorController::class, 'delete']);
 });
 
-Route::group(['prefix' => 'entities'], function ($router) {
+Route::group(['prefix' => 'entities', 'middleware' => ['role:admin']], function ($router) {
     $router->get('/', [EntityController::class, 'index']);
     $router->get('/{id}', [EntityController::class, 'show']);
     $router->post('', [EntityController::class, 'store']);
@@ -51,7 +51,7 @@ Route::group(['prefix' => 'entities'], function ($router) {
     $router->delete('{id}', [EntityController::class, 'delete']);
 });
 
-Route::group(['prefix' => 'custom_attributes'], function ($router) {
+Route::group(['prefix' => 'custom_attributes', 'middleware' => ['role:admin']], function ($router) {
     $router->get('/', [CustomAttributeController::class, 'index']);
     $router->get('/{id}', [CustomAttributeController::class, 'show']);
     $router->post('', [CustomAttributeController::class, 'store']);
@@ -59,7 +59,7 @@ Route::group(['prefix' => 'custom_attributes'], function ($router) {
     $router->delete('{id}', [CustomAttributeController::class, 'delete']);
 });
 
-Route::group(['prefix' => 'assign_custom_attributes'], function ($router) {
+Route::group(['prefix' => 'assign_custom_attributes', 'middleware' => ['role:admin']], function ($router) {
     $router->post('', [EntityCustomAttributeController::class, 'store']);
 });
 
