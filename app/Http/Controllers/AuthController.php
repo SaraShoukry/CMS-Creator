@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -32,6 +33,7 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+
         return $this->createNewToken($token);
     }
     /**
@@ -56,7 +58,8 @@ class AuthController extends Controller
         ));
         return response()->json([
             'message' => 'User successfully registered',
-            'user' => $user
+            'user' => new UserResource($user),
+
         ], 201);
     }
 
