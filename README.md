@@ -28,11 +28,6 @@ values)
 
 - **[Laravel](https://laravel.com/)**
 
-## Routes:
-
-**You can view the api collection**
-
-https://api.postman.com/collections/8478399-453bbeb2-5c35-4ac4-bfc9-6e0fd09fe434?access_key=PMAT-01GZTJ1S6N4YER25F372BAKAQ7
 
 
 ## License
